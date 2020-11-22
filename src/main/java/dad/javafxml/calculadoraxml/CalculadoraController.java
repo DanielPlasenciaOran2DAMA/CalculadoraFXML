@@ -1,14 +1,17 @@
 package dad.javafxml.calculadoraxml;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 
-public class CalculadoraController {
+public class CalculadoraController implements Initializable {
 
 	private CalculadoraModel model = new CalculadoraModel();
 	private Calculadora calculadora = new Calculadora();
@@ -20,118 +23,121 @@ public class CalculadoraController {
 	private TextField datosText;
 
 	public CalculadoraController() throws IOException {
-		FXMLLoader vistaXML = new FXMLLoader(getClass().getResource("/fxml/CalculadoraView.fxml"));
-		vistaXML.setController(this);
-		vistaXML.load();
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/CalculadoraView.fxml"));
+		loader.setController(this);
+		loader.load();
+	}
 
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
 		model.datoProperty().bindBidirectional(datosText.textProperty());
 	}
 
 	@FXML
-	public void onCeroButtonAction(ActionEvent e) {
-		calculadora.insertar('0');
-		model.setDato(calculadora.getPantalla());
-	}
-
-	@FXML
-	public void onUnoButtonAction(ActionEvent e) {
-		calculadora.insertar('1');
-		model.setDato(calculadora.getPantalla());
-	}
-
-	@FXML
-	public void onDosButtonAction(ActionEvent e) {
-		calculadora.insertar('2');
-		model.setDato(calculadora.getPantalla());
-	}
-
-	@FXML
-	public void onTresButtonAction(ActionEvent e) {
-		calculadora.insertar('3');
-		model.setDato(calculadora.getPantalla());
-	}
-
-	@FXML
-	public void onCuatroButtonAction(ActionEvent e) {
-		calculadora.insertar('4');
-		model.setDato(calculadora.getPantalla());
-	}
-
-	@FXML
-	public void onCincoButtonAction(ActionEvent e) {
-		calculadora.insertar('5');
-		model.setDato(calculadora.getPantalla());
-	}
-
-	@FXML
-	public void onSeisButtonAction(ActionEvent e) {
-		calculadora.insertar('6');
-		model.setDato(calculadora.getPantalla());
-	}
-
-	@FXML
-	public void onSieteButtonAction(ActionEvent e) {
-		calculadora.insertar('7');
-		model.setDato(calculadora.getPantalla());
-	}
-
-	@FXML
-	public void onOchoButtonAction(ActionEvent e) {
-		calculadora.insertar('8');
-		model.setDato(calculadora.getPantalla());
-	}
-
-	@FXML
-	public void onNueveButtonAction(ActionEvent e) {
-		calculadora.insertar('9');
-		model.setDato(calculadora.getPantalla());
-	}
-
-	@FXML
-	public void onComaButtonAction(ActionEvent e) {
-		calculadora.insertarComa();
-		model.setDato(calculadora.getPantalla());
-	}
-
-	@FXML
-	public void onSumaButtonAction(ActionEvent e) {
-		calculadora.operar(calculadora.SUMAR);
-		model.setDato(calculadora.getPantalla());
-	}
-
-	@FXML
-	public void onRestaButtonAction(ActionEvent e) {
-		calculadora.operar(calculadora.RESTAR);
-		model.setDato(calculadora.getPantalla());
-	}
-
-	@FXML
-	public void onMultiplicacionButtonAction(ActionEvent e) {
-		calculadora.operar(calculadora.MULTIPLICAR);
-		model.setDato(calculadora.getPantalla());
-	}
-
-	@FXML
-	public void onDividirButtonAction(ActionEvent e) {
-		calculadora.operar(calculadora.DIVIDIR);
-		model.setDato(calculadora.getPantalla());
-	}
-
-	@FXML
-	public void onIgualButtonAction(ActionEvent e) {
-		calculadora.operar(calculadora.IGUAL);
-		model.setDato(calculadora.getPantalla());
-	}
-
-	@FXML
-	public void onBorrarButtonAction(ActionEvent e) {
+	void onBorrarButtonAction(ActionEvent event) {
 		calculadora.borrar();
 		model.setDato(calculadora.getPantalla());
 	}
 
 	@FXML
-	public void onBorrarTodoButtonAction(ActionEvent e) {
+	void onBorrarTodoButtonAction(ActionEvent event) {
 		calculadora.borrarTodo();
+		model.setDato(calculadora.getPantalla());
+	}
+
+	@FXML
+	void onCeroButtonAction(ActionEvent event) {
+		calculadora.insertar('0');
+		model.setDato(calculadora.getPantalla());
+	}
+
+	@FXML
+	void onCincoButtonAction(ActionEvent event) {
+		calculadora.insertar('5');
+		model.setDato(calculadora.getPantalla());
+	}
+
+	@FXML
+	void onComaButtonAction(ActionEvent event) {
+		calculadora.insertarComa();
+		model.setDato(calculadora.getPantalla());
+	}
+
+	@FXML
+	void onCuatroButtonAction(ActionEvent event) {
+		calculadora.insertar('4');
+		model.setDato(calculadora.getPantalla());
+	}
+
+	@FXML
+	void onDividirButtonAction(ActionEvent event) {
+		calculadora.operar(Calculadora.DIVIDIR);
+		model.setDato(calculadora.getPantalla());
+	}
+
+	@FXML
+	void onDosButtonAction(ActionEvent event) {
+		calculadora.insertar('2');
+		model.setDato(calculadora.getPantalla());
+	}
+
+	@FXML
+	void onIgualButtonAction(ActionEvent event) {
+		calculadora.operar(Calculadora.IGUAL);
+		model.setDato(calculadora.getPantalla());
+	}
+
+	@FXML
+	void onMultiplicacionButtonAction(ActionEvent event) {
+		calculadora.operar(Calculadora.MULTIPLICAR);
+		model.setDato(calculadora.getPantalla());
+	}
+
+	@FXML
+	void onNueveButtonAction(ActionEvent event) {
+		calculadora.insertar('9');
+		model.setDato(calculadora.getPantalla());
+	}
+
+	@FXML
+	void onOchoButtonAction(ActionEvent event) {
+		calculadora.insertar('8');
+		model.setDato(calculadora.getPantalla());
+	}
+
+	@FXML
+	void onRestaButtonAction(ActionEvent event) {
+		calculadora.operar(Calculadora.RESTAR);
+		model.setDato(calculadora.getPantalla());
+	}
+
+	@FXML
+	void onSeisButtonAction(ActionEvent event) {
+		calculadora.insertar('6');
+		model.setDato(calculadora.getPantalla());
+	}
+
+	@FXML
+	void onSieteButtonAction(ActionEvent event) {
+		calculadora.insertar('7');
+		model.setDato(calculadora.getPantalla());
+	}
+
+	@FXML
+	void onSumaButtonAction(ActionEvent event) {
+		calculadora.operar(Calculadora.SUMAR);
+		model.setDato(calculadora.getPantalla());
+	}
+
+	@FXML
+	void onTresButtonAction(ActionEvent event) {
+		calculadora.insertar('3');
+		model.setDato(calculadora.getPantalla());
+	}
+
+	@FXML
+	void onUnoButtonAction(ActionEvent event) {
+		calculadora.insertar('1');
 		model.setDato(calculadora.getPantalla());
 	}
 
